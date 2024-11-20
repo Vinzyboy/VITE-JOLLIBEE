@@ -1,13 +1,13 @@
-import { imgPath } from "@/components/helpers/functions-general";
-import { ArrowLeft, CreditCard, PhilippinePeso, X } from "lucide-react";
-import React from "react";
+import { imgPath } from '@/components/helpers/functions-general';
+import { ArrowLeft, ShoppingBag, Utensils, X } from 'lucide-react';
+import React from 'react'
 
-const Payment = ({ setOption, handleProcessing, setShowCart }) => {
+const Dining = ({ setOption, setShowCart }) => {
   return (
     <div>
       <div className="max-w-[600px] w-full bg-white rounded-md absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 overflow-hidden">
         <div className="modal-header p-4 flex justify-between items-center border-b border-gray-200">
-          <button onClick={() => setOption("dining")}>
+          <button onClick={() => setOption("cart")}>
             <ArrowLeft />
           </button>
           <h5 className="mb-0">Choose one</h5>
@@ -24,21 +24,21 @@ const Payment = ({ setOption, handleProcessing, setShowCart }) => {
               className="mx-auto mb-5 w-[100px]"
             />
             <p className="text-2xl mb-5 font-bold">
-              Select preferred payment option
+              Select preferred dining option
             </p>
             <button
               className="bg-primary px-8 py-4 w-[250px] flex justify-center gap-2 font-bold text-white items-center rounded-md"
-              onClick={handleProcessing}
+              onClick={() => setOption("payment")}
             >
-              <PhilippinePeso />
-              Counter Payment
+              <Utensils />
+              Dine in
             </button>
             <h3 className="my-3">or</h3>
             <button
               className="bg-primary px-8 py-4 w-[250px] flex justify-center gap-2 font-bold text-white items-center rounded-md"
-              onClick={handleProcessing}
+              onClick={() => setOption("payment")}
             >
-              <CreditCard /> Card / Online Payment
+              <ShoppingBag /> Take out
             </button>
           </div>
         </div>
@@ -47,4 +47,4 @@ const Payment = ({ setOption, handleProcessing, setShowCart }) => {
   );
 };
 
-export default Payment;
+export default Dining
