@@ -5,6 +5,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "200",
     menu_image: "chicken-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 2,
@@ -12,6 +13,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "270",
     menu_image: "chicken-2.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 3,
@@ -19,6 +21,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "270",
     menu_image: "chicken-3.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 4,
@@ -26,6 +29,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "450",
     menu_image: "chicken-4.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 5,
@@ -33,6 +37,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "200",
     menu_image: "chicken-5.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 6,
@@ -40,6 +45,7 @@ export const menus = [
     menu_category: "Chicken",
     menu_price: "200",
     menu_image: "chicken-6.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 7,
@@ -47,6 +53,7 @@ export const menus = [
     menu_category: "Value Meal",
     menu_price: "350",
     menu_image: "value-meal-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 8,
@@ -54,6 +61,7 @@ export const menus = [
     menu_category: "Value Meal",
     menu_price: "250",
     menu_image: "value-meal-2.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 9,
@@ -61,6 +69,7 @@ export const menus = [
     menu_category: "Value Meal",
     menu_price: "250",
     menu_image: "value-meal-3.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 10,
@@ -68,6 +77,7 @@ export const menus = [
     menu_category: "Value Meal",
     menu_price: "250",
     menu_image: "value-meal-4.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 11,
@@ -75,6 +85,7 @@ export const menus = [
     menu_category: "Value Meal",
     menu_price: "250",
     menu_image: "value-meal-5.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 12,
@@ -82,6 +93,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "100",
     menu_image: "burger-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 13,
@@ -89,6 +101,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "120",
     menu_image: "burger-2.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 23,
@@ -96,6 +109,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "120",
     menu_image: "burger-3.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 24,
@@ -103,6 +117,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "150",
     menu_image: "burger-4.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 25,
@@ -110,6 +125,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "250",
     menu_image: "burger-5.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 26,
@@ -117,6 +133,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "300",
     menu_image: "burger-6.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 27,
@@ -124,6 +141,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "350",
     menu_image: "burger-7.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 28,
@@ -131,6 +149,7 @@ export const menus = [
     menu_category: "Burger",
     menu_price: "350",
     menu_image: "burger-7.webp",
+    menu_is_active: true,
     },
   
   {
@@ -139,6 +158,7 @@ export const menus = [
     menu_category: "Dessert",
     menu_price: "60",
     menu_image: "dessert-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 15,
@@ -146,6 +166,7 @@ export const menus = [
     menu_category: "Dessert",
     menu_price: "60",
     menu_image: "dessert-2.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 29,
@@ -153,6 +174,7 @@ export const menus = [
     menu_category: "Dessert",
     menu_price: "100",
     menu_image: "dessert-3.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 30,
@@ -160,6 +182,7 @@ export const menus = [
     menu_category: "Dessert",
     menu_price: "100",
     menu_image: "dessert-4.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 31,
@@ -167,6 +190,7 @@ export const menus = [
     menu_category: "Dessert",
     menu_price: "50",
     menu_image: "dessert-5.webp",
+    menu_is_active: true,
     },
   
   {
@@ -175,6 +199,7 @@ export const menus = [
     menu_category: "Palabok",
     menu_price: "100",
     menu_image: "palabok-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 17,
@@ -182,6 +207,7 @@ export const menus = [
     menu_category: "Palabok",
     menu_price: "90",
     menu_image: "palabok-2.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 32,
@@ -189,6 +215,7 @@ export const menus = [
     menu_category: "Palabok",
     menu_price: "200",
     menu_image: "palabok-3.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 33,
@@ -196,6 +223,7 @@ export const menus = [
     menu_category: "Palabok",
     menu_price: "500",
     menu_image: "palabok-4.webp",
+    menu_is_active: true,
     },
   
   {
@@ -204,6 +232,7 @@ export const menus = [
     menu_category: "Sides",
     menu_price: "40",
     menu_image: "sides-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 19,
@@ -211,6 +240,7 @@ export const menus = [
     menu_category: "Sides",
     menu_price: "30",
     menu_image: "sides-2.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 34,
@@ -218,6 +248,7 @@ export const menus = [
     menu_category: "Sides",
     menu_price: "30",
     menu_image: "sides-3.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 35,
@@ -225,6 +256,7 @@ export const menus = [
     menu_category: "Sides",
     menu_price: "50",
     menu_image: "sides-4.webp",
+    menu_is_active: true,
     },
   {
     menu_aid: 36,
@@ -232,6 +264,7 @@ export const menus = [
     menu_category: "Sides",
     menu_price: "90",
     menu_image: "sides-5.webp",
+    menu_is_active: true,
     },
   
   {
@@ -240,6 +273,7 @@ export const menus = [
     menu_category: "Spaghetti",
     menu_price: "100",
     menu_image: "spag-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 20,
@@ -247,6 +281,7 @@ export const menus = [
     menu_category: "Spaghetti",
     menu_price: "150",
     menu_image: "spag-2.webp",
+    menu_is_active: true,
     },
   
   {
@@ -255,6 +290,7 @@ export const menus = [
     menu_category: "Spaghetti",
     menu_price: "150",
     menu_image: "spag-3.webp",
+    menu_is_active: true,
     },
   
   {
@@ -263,6 +299,7 @@ export const menus = [
     menu_category: "Steak",
     menu_price: "100",
     menu_image: "steak-1.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 22,
@@ -270,6 +307,7 @@ export const menus = [
     menu_category: "Steak",
     menu_price: "300",
     menu_image: "steak-2.webp",
+    menu_is_active: true,
   },
   {
     menu_aid: 38,
@@ -277,5 +315,6 @@ export const menus = [
     menu_category: "Steak",
     menu_price: "700",
     menu_image: "steak-3.webp",
+    menu_is_active: true,
   },
 ];

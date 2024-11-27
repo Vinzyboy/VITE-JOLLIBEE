@@ -4,7 +4,7 @@ import React from "react";
 const MenuTitle = ({category}) => {
   return (
     <>
-      <div className="p-4 text-white gap-5 bg-primary flex items-center">
+      <div className="p-4 text-white gap-5 bg-myred flex items-center">
               <img src={`${imgPath}/jollibeelogo.png`} alt="" />
               <h2 className="mb-0">{category}</h2>
       </div>

@@ -102,7 +102,7 @@ const ModalCart = ({ setShowCart, cartData, setCartData, getTotal }) => {
                       <ul className="flex items-center gap-3 justify-center">
                         <li>
                           <button
-                            className="grid size-[30px] rounded-full place-content-center bg-primary text-white"
+                            className="grid size-[30px] rounded-full place-content-center bg-myred text-white"
                             onClick={() => handleRemove(item)}
                           >
                             <Minus size={16} />
@@ -111,7 +111,7 @@ const ModalCart = ({ setShowCart, cartData, setCartData, getTotal }) => {
                         <li>{item.quantity}</li>
                         <li>
                           <button
-                            className="grid size-[30px] rounded-full place-content-center bg-primary text-white"
+                            className="grid size-[30px] rounded-full place-content-center bg-myred text-white"
                             onClick={() => handleAdd(item)}
                           >
                             <Plus size={16} />
@@ -128,7 +128,7 @@ const ModalCart = ({ setShowCart, cartData, setCartData, getTotal }) => {
               <div className="modal-summary absolute bottom-0 left-0 w-full p-4 bg-white flex justify-between items-center shadow-[0_10px_30px_rgba(0,0,0,_0.4)]">
                 <h2 className="mb-0">Total: P {getTotal.toFixed(2)}</h2>
                 <button
-                  className="bg-primary px-4 py-2 rounded-md text-white"
+                  className="bg-myred px-4 py-2 rounded-md text-white"
                   onClick={() => setOption("dining")}
                 >
                   Continue

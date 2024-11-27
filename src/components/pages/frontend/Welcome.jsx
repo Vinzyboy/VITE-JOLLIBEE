@@ -17,7 +17,7 @@ const Welcome = () => {
         />
 
         <div className=" absolute w-full bottom-0 left-0">
-          <div className="bg-primary text-white text-center p-4">
+          <div className="bg-myred text-white text-center p-4">
             <Link
               to="/order"
               className="text-4xl font-bold flex gap-5 justify-center items-center"
