@@ -13,7 +13,7 @@ const DashboardAccordion = ({ title, filterby }) => {
   return (
     <div className="accordion mb-3">
       <div
-        className="accordion-header p-2 flex justify-between bg-secondary  rounded-t-md cursor-pointer"
+        className="accordion-header p-2 px-5 flex justify-between bg-secondary  rounded-t-md cursor-pointer"
         onClick={handleToggleOpen}
       >
         <h5 className="mb-0 ">{title}</h5>

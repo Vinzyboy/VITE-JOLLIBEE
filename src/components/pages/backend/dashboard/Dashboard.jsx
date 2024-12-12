@@ -24,8 +24,8 @@ const Dashboard = () => {
           <SideNavigation menu="dashboard" />
           <main>
             <Header title="Dashboard" subtitle="Welcome to Jollibee" />
-            <div className="p-8">
-              <div className="p-8">
+            <div className="p-5">
+              <div >
                 <div className="grid grid-cols-[1fr_400px] gap-5">
                   <div className="stats">
                     <div className="grid grid-cols-4 gap-5">
@@ -42,8 +42,8 @@ const Dashboard = () => {
                     <div className="chart  py-2">
                       <h2>Menu Prices</h2>
                       <BarChart
-                        width={1300}
-                        height={500}
+                        width={1000}
+                        height={400}
                         data={menus.slice(0, 10)}
                         margin={{
                           top: 40,

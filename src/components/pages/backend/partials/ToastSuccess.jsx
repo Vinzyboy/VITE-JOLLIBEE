@@ -18,7 +18,7 @@ const ToastSuccess = () => {
           bg-primary text-success flex gap-2 items-center p-1.5 px-2.5 rounded-md"
       >
         <CheckCircle size={16} />
-        Record Successfully {store.message}!
+        Record {store.message}!
       </div>
     </>
   );
