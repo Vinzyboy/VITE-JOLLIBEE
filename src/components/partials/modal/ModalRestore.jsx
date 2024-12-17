@@ -24,6 +24,8 @@ const ModalRestore = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
       // dispatch(setIsDelete(false));
 
       if (!data.success) {
+        dispatch(setError(true));
+        dispatch(setMessage(data.error));
         console.log("May error!");
       } else {
         dispatch(setIsRestore(false));

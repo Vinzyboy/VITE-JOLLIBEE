@@ -1,3 +1,5 @@
+import React from "react";
+
 export const urlJollibeeLocal = "http://localhost/vite-jollibee"; //from thunder client
 export const imgPath = "http://localhost/vite-jollibee/public/img";
 

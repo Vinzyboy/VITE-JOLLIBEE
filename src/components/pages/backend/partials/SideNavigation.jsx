@@ -1,6 +1,12 @@
 import { imgPath } from "@/components/helpers/functions-general";
-import { Clapperboard, LayoutDashboard, Megaphone, UtensilsCrossed } from "lucide-react";
+import {
+  Clapperboard,
+  LayoutDashboard,
+  Megaphone,
+  UtensilsCrossed,
+} from "lucide-react";
 import React from "react";
+import { FaCog } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const SideNavigation = ({ menu }) => {
@@ -8,22 +14,27 @@ const SideNavigation = ({ menu }) => {
     {
       title: "Dashboard",
       slug: "/admin/dashboard",
-      icon: <LayoutDashboard size={17}/>,
+      icon: <LayoutDashboard size={17} />,
     },
     {
       title: "Advertisement",
       slug: "/admin/advertisement",
-      icon: <Megaphone size={17}/>,
+      icon: <Megaphone size={17} />,
     },
     {
       title: "Food",
       slug: "/admin/foods",
-      icon: <UtensilsCrossed size={17}/>,
+      icon: <UtensilsCrossed size={17} />,
     },
     {
       title: "Category",
       slug: "/admin/category",
-      icon: <UtensilsCrossed size={17}/>,
+      icon: <UtensilsCrossed size={17} />,
+    },
+    {
+      title: "Settings",
+      slug: "/admin/settings",
+      icon: <FaCog size={17} />,
     },
   ];
   return (
@@ -45,7 +56,10 @@ const SideNavigation = ({ menu }) => {
                 } p-2 mb-2 rounded-md border border-transparent opacity-60 hover:opacity-100`}
                 key={key}
               >
-                <NavLink to={`${item.slug}`} className="flex gap-2 items-center text-base">
+                <NavLink
+                  to={`${item.slug}`}
+                  className="flex gap-2 items-center text-base"
+                >
                   {item.icon}
                   {item.title}
                 </NavLink>

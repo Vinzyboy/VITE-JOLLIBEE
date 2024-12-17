@@ -11,6 +11,10 @@ import Login from "./components/pages/backend/access/Login";
 import SetPassword from "./components/pages/backend/access/SetPassword";
 import ForgotPassword from "./components/pages/backend/access/ForgotPassword";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Settings from "./components/pages/backend/settings/Settings";
+import Role from "./components/pages/backend/settings/role/Role";
+import { routeDeveloper } from "./routes/routesDeveloper";
+import { routeAdmin } from "./routes/routesAdmin";
 const App = () => {
   const queryClient = new QueryClient();
   return (
@@ -21,10 +25,17 @@ const App = () => {
             <Routes>
               <Route index element={<Welcome />} />
               <Route path="/order" element={<Order />} />
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route path="/admin/advertisement" element={<Advertisement />} />
-              <Route path="/admin/foods" element={<Foods />} />
-              <Route path="/admin/category" element={<Category />} />
+
+              {routeAdmin.map((item, key) => {
+                return (
+                  <Route path={item.route} key={key} element={item.element} />
+                );
+              })}
+              {routeDeveloper.map((item, key) => {
+                return (
+                  <Route path={item.route} key={key} element={item.element} />
+                );
+              })}
 
               <Route path="/admin/login" element={<Login />} />
               <Route path="/admin/set-password" element={<SetPassword />} />

@@ -5,14 +5,14 @@ require '../../core/header.php';
 require '../../core/functions.php';
 // require 'functions.php';
 // use needed classes
-require '../../models/category/Category.php';
+require '../../models/food/Food.php';
 
 
 // check database connection
 $conn = null;
 $conn = checkDbConnection();
 // make instance of classes
-$category = new Category($conn);
+$food = new Food($conn);
 $response = new Response();
 // validate api key
 if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
@@ -21,19 +21,19 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
     if (array_key_exists("start", $_GET)) {
         // get data
         // get task id from query string
-        $category->category_start = $_GET['start'];
-        $category->category_total = 11;
+        $food->food_start = $_GET['start'];
+        $food->food_total = 11;
         //check to see if task id in query string is not empty and is number, if not return json error
-        checkLimitId($category->category_start, $category->category_total);
+        checkLimitId($food->food_start, $food->food_total);
 
-        $query = checkReadLimit($category);
-        $total_result = checkReadAll($category);
+        $query = checkReadLimit($food);
+        $total_result = checkReadAll($food);
         http_response_code(200);
         checkReadQuery(
             $query,
             $total_result,
-            $category->category_total,
-            $category->category_start
+            $food->food_total,
+            $food->food_start
         );
     }
     // return 404 error if endpoint not available

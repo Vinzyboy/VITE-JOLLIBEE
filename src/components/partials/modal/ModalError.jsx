@@ -1,7 +1,10 @@
 import { GetFocus } from "@/components/helpers/functions-general";
-import { setError } from "@/store/storeAction";
-import { StoreContext } from "@/store/storeContext";
+import { setError } from "@/components/store/storeAction";
+import { StoreContext } from "@/components/store/storeContext";
 import React from "react";
+
+
+
 const ModalError = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("-translate-y-60");

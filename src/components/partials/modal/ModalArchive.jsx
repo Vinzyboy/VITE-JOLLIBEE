@@ -6,6 +6,11 @@ import { FaArchive } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
 import ButtonSpinner from "../spinner/ButtonSpinner";
 import { StoreContext } from "@/components/store/storeContext";
+import {
+  setError,
+  setMessage,
+  setSuccess,
+} from "@/components/store/storeAction";
 
 const ModalArchive = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -23,10 +28,13 @@ const ModalArchive = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
       // dispatch(setIsDelete(false));
 
       if (!data.success) {
-        console.log("May error!");
+        dispatch(setError(true));
+        dispatch(setMessage(data.error));
+        dispatch(setSuccess(false));
       } else {
         dispatch(setIsArchive(false));
-        console.log("Naysuu!");
+        dispatch(setMessage("Successfull"));
+        dispatch(setSuccess(false));
       }
     },
   });
