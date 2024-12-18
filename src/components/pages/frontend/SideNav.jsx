@@ -17,7 +17,7 @@ const SideNav = ({ setCategoryId, isLoading, isFetching, result }) => {
       <ul className="relative">
         {isFetching && !isLoading && <FetchingSpinner />}
         {isLoading && <TableLoader cols={1} count={15} />}
-        {
+        {!isLoading && (
           <button
             type="button"
             onClick={() => handleClickCategory({ category_aid: "" })}
@@ -30,7 +30,7 @@ const SideNav = ({ setCategoryId, isLoading, isFetching, result }) => {
             />
             <small className="text-xs">All</small>
           </button>
-        }
+        )}
         {result?.count > 0 &&
           result.data.map((item, key) => (
             <li className="mb-3" key={key}>

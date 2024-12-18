@@ -43,6 +43,7 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
   const search = React.useRef({ value: "" });
   const [page, setPage] = React.useState(1);
   const { ref, inView } = useInView();
+  
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setIsCategoryEdit(item);
@@ -109,6 +110,7 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
       fetchNextPage();
     }
   }, [inView]);
+
   let counter = 1;
   return (
     <>

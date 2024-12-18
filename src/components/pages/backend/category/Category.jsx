@@ -8,7 +8,6 @@ import { StoreContext } from "@/components/store/storeContext";
 import { setIsAdd } from "@/components/store/storeAction";
 import ModalValidation from "../partials/modals/ModalValidation";
 import ModalError from "../partials/modals/ModalError";
-
 import CategoryTable from "./CategoryTable";
 import ModalAddCategory from "./ModalAddCategory";
 import ToastSuccess from "../partials/ToastSuccess";
