@@ -1,5 +1,4 @@
 import React from "react";
-import { menus } from "../menu-Data";
 import { getFoodByCategory } from "./function";
 
 const DashboardCard = ({ item, dataFood }) => {

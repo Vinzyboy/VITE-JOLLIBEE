@@ -2,7 +2,7 @@ import { ChevronDown, Dot } from "lucide-react";
 import React from "react";
 import IconNoData from "../partials/IconNoData";
 
-const DashboardAccordion = ({item, foodItems }) => {
+const DashboardAccordion = ({ item, foodItems }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleToggleOpen = () => setIsOpen((prev) => !prev);

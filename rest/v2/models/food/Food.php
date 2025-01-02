@@ -96,23 +96,7 @@ class Food
     }
     return $query;
   }
-  // public function search()
-  // {
-  //   try {
-  //     $sql = "select * ";
-  //     $sql .= "from {$this->tblFood} ";
-  //     $sql .= "where food_name like :food_name ";
-  //     $sql .= "order by food_is_active desc, ";
-  //     $sql .= "food_aid asc ";
-  //     $query = $this->connection->prepare($sql);
-  //     $query->execute([
-  //       "food_name" => "%{$this->food_search}%",
-  //     ]);
-  //   } catch (PDOException $ex) {
-  //     $query = false;
-  //   }
-  //   return $query;
-  // }
+
   public function filterActive()
   {
     try {

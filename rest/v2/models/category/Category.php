@@ -153,10 +153,6 @@ class Category
         "category_title" => $this->category_title,
         "category_datetime" => $this->category_datetime,
         "category_created" => $this->category_created,
-
-
-
-
       ]);
       $this->lastInsertedId = $this->connection->lastInsertId();
     } catch (PDOException $ex) {
@@ -183,6 +179,7 @@ class Category
     return $query;
   }
 
+  
   public function checkName()
   {
     try {
@@ -197,8 +194,6 @@ class Category
     }
     return $query;
   }
-
-
 
 
   public function update()
@@ -221,8 +216,6 @@ class Category
     }
     return $query;
   }
-
-
 
 
   public function delete()

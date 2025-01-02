@@ -1,6 +1,5 @@
 import React from "react";
-import TableLoader from "../partials/TableLoader";
-import Pills from "../partials/Pills";
+
 import {
   Archive,
   ArchiveRestore,
@@ -8,10 +7,7 @@ import {
   FileVideo,
   Trash2,
 } from "lucide-react";
-import LoadMore from "../partials/LoadMore";
-import SpinnerTable from "../partials/spinners/SpinnerTable";
-import IconNoData from "../partials/IconNoData";
-import IconServerError from "../partials/IconServerError";
+
 import { StoreContext } from "@/components/store/storeContext";
 import {
   setIsAdd,
@@ -33,8 +29,12 @@ import { useInView } from "react-intersection-observer";
 import SearchBar from "@/components/partials/SearchBar";
 import { FaArchive, FaEdit, FaTrash, FaTrashRestore } from "react-icons/fa";
 import SearchBarWithFilterStatus from "@/components/partials/SearchBarWithFilterStatus";
+import TableLoader from "../../partials/TableLoader";
+import LoadMore from "../../partials/LoadMore";
+import IconNoData from "../../partials/IconNoData";
+import IconServerError from "../../partials/IconServerError";
 
-const CategoryTable = ({ setIsCategoryEdit }) => {
+const DeveloperList = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isFilter, setIsFilter] = React.useState(false);
@@ -43,22 +43,31 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
   const search = React.useRef({ value: "" });
   const [page, setPage] = React.useState(1);
   const { ref, inView } = useInView();
+  const [dataItem, setDataItem] = React.useState("");
 
+  const handleAdd = () => {
+    dispatch(setIsAdd(true));
+  };
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
-    setIsCategoryEdit(item);
+    setItemEdit(item);
+    setIsId(item.developer_aid);
   };
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsId(item.category_aid);
+    setItemEdit(item);
+    setIsId(item.developer_aid);
+    setDataItem(item);
   };
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
-    setIsId(item.category_aid);
+    setItemEdit(item);
+    setIsId(item.developer_aid);
   };
   const handleArchive = (item) => {
     dispatch(setIsArchive(true));
-    setIsId(item.category_aid);
+    setItemEdit(item);
+    setIsId(item.developer_aid);
   };
 
   // const {
@@ -68,10 +77,10 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
   //   data: result,
   //   status,
   // } = useQueryData(
-  //   `/v2/category`, // endpoint
+  //   `/v2/developer`, // endpoint
   //   "get", // method
-  //   "category" // key
-  // );
+  //   "developer" // key
+  //   );
 
   const {
     data: result,
@@ -82,11 +91,11 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["category", onSearch, isFilter, statusFilter],
+    queryKey: ["developer", onSearch, isFilter, statusFilter],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        "/v2/category/search", // search or filter endpoint
-        `/v2/category/page/${pageParam}`, // page api/endpoint
+        "/v2/developer/search", // search or filter endpoint
+        `/v2/developer/page/${pageParam}`, // page api/endpoint
         isFilter || store.isSearch, // search boolean
         {
           isFilter,
@@ -110,7 +119,6 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
       fetchNextPage();
     }
   }, [inView]);
-
   let counter = 1;
   return (
     <>
@@ -128,15 +136,16 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
           setIsFilter={setIsFilter}
         />
       </div>
-      <div className="p-4 bg-secondary rounded-md mt-5 border border-line relative">
+      <div className="p-4 bg-secondary rounded-md mt-10 border border-line relative">
         {/* {isFetching && !isLoading && <FetchingSpinner />} */}
-        <div className="table-wrapper custom-scroll">
+        <div className="table-wrapper custom-scroll max-h-[60vh]">
           <table>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Status</th>
-                <th>Title</th>
+                <th className="w-[33%]">Name</th>
+                <th>Email</th>
                 <th></th>
               </tr>
             </thead>
@@ -170,19 +179,19 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
                       <tr key={key} className="group relative cursor-pointer">
                         <td className="text-center">{counter++}</td>
                         <td>
-                          {item.category_is_active === 1 ? (
+                          {item.user_developer_is_active === 1 ? (
                             <Status text="Active" />
                           ) : (
                             <Status text="Inactive" />
                           )}
                         </td>
-                        <td>{item.category_title}</td>
+                        <td>{item.user_developer_email}</td>
                         <td
                           colSpan="100%"
                           className="opacity-0 group-hover:opacity-100"
                         >
                           <div className="flex items-center justify-end gap-2 mr-4">
-                            {item.category_is_active == 1 ? (
+                            {item.user_developer_is_active == 1 ? (
                               <>
                                 <button
                                   type="button"
@@ -251,26 +260,27 @@ const CategoryTable = ({ setIsCategoryEdit }) => {
       {store.isDelete && (
         <ModalDelete
           setIsDelete={setIsDelete}
-          mysqlApiDelete={`/v2/category/${id}`}
-          queryKey={"category"}
+          mysqlApiDelete={`/v2/developer/${id}`}
+          queryKey={"developer"}
+          item={dataItem.developer_name}
         />
       )}
       {store.isArchive && (
         <ModalArchive
           setIsArchive={setIsArchive}
-          mysqlEndpoint={`/v2/category/active/${id}`}
-          queryKey={"category"}
+          mysqlEndpoint={`/v2/developer/active/${id}`}
+          queryKey={"developer"}
         />
       )}
       {store.isRestore && (
         <ModalRestore
           setIsRestore={setIsRestore}
-          mysqlEndpoint={`/v2/category/active/${id}`}
-          queryKey={"category"}
+          mysqlEndpoint={`/v2/developer/active/${id}`}
+          queryKey={"developer"}
         />
       )}
     </>
   );
 };
 
-export default CategoryTable;
+export default DeveloperList;

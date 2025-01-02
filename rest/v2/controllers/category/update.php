@@ -14,7 +14,6 @@ if (array_key_exists("categoryid", $_GET)) {
   $category->category_aid = $_GET['categoryid'];
   $category->category_image = checkIndex($data, "category_image");
   $category->category_title = checkIndex($data, "category_title");
-
   $category->category_created = date("Y-m-d H:i:s");
   $category->category_datetime = date("Y-m-d H:i:s");
   checkId($category->category_aid);

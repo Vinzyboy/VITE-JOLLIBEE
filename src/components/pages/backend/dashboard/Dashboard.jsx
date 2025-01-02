@@ -120,7 +120,7 @@ const Dashboard = () => {
                       dataCategory?.data.map((item, key) => {
                         const foodItems = dataFood?.data.filter(
                           (foodItem) =>
-                            foodItem.foot_category_id == item.category_aid
+                            foodItem.food_category_id == item.category_aid
                         );
                         return (
                           <DashboardAccordion
