@@ -51,23 +51,23 @@ const DeveloperList = ({ setItemEdit }) => {
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
-    setIsId(item.developer_aid);
+    setIsId(item.user_developer_aid);
   };
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
     setItemEdit(item);
-    setIsId(item.developer_aid);
+    setIsId(item.user_developer_aid);
     setDataItem(item);
   };
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
     setItemEdit(item);
-    setIsId(item.developer_aid);
+    setIsId(item.user_developer_aid);
   };
   const handleArchive = (item) => {
     dispatch(setIsArchive(true));
     setItemEdit(item);
-    setIsId(item.developer_aid);
+    setIsId(item.user_developer_aid);
   };
 
   // const {
@@ -184,6 +184,10 @@ const DeveloperList = ({ setItemEdit }) => {
                           ) : (
                             <Status text="Inactive" />
                           )}
+                        </td>
+                        <td>
+                          {item.user_developer_first_name}
+                          {item.user_developer_last_name}
                         </td>
                         <td>{item.user_developer_email}</td>
                         <td

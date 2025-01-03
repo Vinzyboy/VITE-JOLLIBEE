@@ -54,10 +54,17 @@ const ModalAddDeveloper = ({ itemEdit, developerRole }) => {
       ? itemEdit.user_developer_first_name
       : "",
     user_developer_last_name: itemEdit ? itemEdit.user_developer_last_name : "",
-    user_developer_email: itemEdit ? itemEdit.user_developer_role_id : "",
+
+    user_developer_email: itemEdit ? itemEdit.user_developer_email : "",
+
     user_developer_role_id: developerRole[0].role_aid,
+
     user_developer_email_old: itemEdit ? itemEdit.user_developer_email : "",
-    user_developer_name_old: itemEdit ? itemEdit.user_developer_last_name : "",
+
+    user_developer_name_old: itemEdit
+      ? `${itemEdit.user_developer_first_name}
+       ${itemEdit.user_developer_last_name}`
+      : "",
   };
   const yupSchema = Yup.object({
     user_developer_first_name: Yup.string().required("Required"),

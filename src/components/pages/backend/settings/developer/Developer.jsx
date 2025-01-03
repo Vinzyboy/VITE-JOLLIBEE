@@ -1,3 +1,5 @@
+import ModalError from "@/components/partials/modal/ModalError";
+import ModalSuccess from "@/components/partials/modal/modalSuccess";
 import { setError, setIsAdd, setMessage } from "@/components/store/storeAction";
 import { StoreContext } from "@/components/store/storeContext";
 import { Plus } from "lucide-react";
@@ -5,17 +7,15 @@ import React from "react";
 import Footer from "../../partials/Footer";
 import Header from "../../partials/Header";
 import SideNavigation from "../../partials/SideNavigation";
-
-import ModalSuccess from "@/components/partials/modal/modalSuccess";
-import ModalError from "@/components/partials/modal/ModalError";
+import ModalAddUser from "./ModalAddDeveloper";
 import UserList from "./DeveloperList";
 import DeveloperList from "./DeveloperList";
-import useQueryData from "@/components/custom-hook/useQueryData";
 import ModalAddDeveloper from "./ModalAddDeveloper";
+import useQueryData from "@/components/custom-hook/useQueryData";
 
 const Developer = () => {
-  const { dispatch, store } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
+  const { dispatch, store } = React.useContext(StoreContext);
 
   const { isFetching, data: role } = useQueryData(
     `/v2/role`, // endpoint
@@ -23,19 +23,19 @@ const Developer = () => {
     "role" // key
   );
 
-  const developerRole = role?.data.filter(
-    (item) => item.role_is_developer == 1
-  );
-  console.log(developerRole);
-
   const handleAdd = () => {
-    if (developerRole?.lenght === 0) {
+    if (developerRole?.length === 0) {
       dispatch(setError(true));
       dispatch(setMessage("Developer role is required"));
     }
     setItemEdit(null);
     dispatch(setIsAdd(true));
   };
+
+  const developerRole = role?.data.filter(
+    (item) => item.role_is_developer == 1
+  );
+
   return (
     <>
       <section className="layout-main ">
@@ -44,13 +44,17 @@ const Developer = () => {
           <main>
             <Header title="Developer" subtitle="Welcome to Jollibee" />
             <div className="p-5">
-              <div className="flex justify-between items-center">
+              <div className="flex items-end justify-between">
                 <div></div>
-                <button className="btn btn-add" onClick={handleAdd}>
-                  <Plus size={16} /> Add New
-                </button>
+                {isFetching ? (
+                  "Loading..."
+                ) : (
+                  <button className="btn btn-add" onClick={handleAdd}>
+                    <Plus size={16} />
+                    Add New
+                  </button>
+                )}
               </div>
-
               <DeveloperList setItemEdit={setItemEdit} />
             </div>
 
@@ -59,11 +63,11 @@ const Developer = () => {
         </div>
       </section>
 
+      {store.success && <ModalSuccess />}
+      {store.error && <ModalError />}
       {store.isAdd && (
         <ModalAddDeveloper itemEdit={itemEdit} developerRole={developerRole} />
       )}
-      {store.success && <ModalSuccess />}
-      {store.error && <ModalError />}
     </>
   );
 };

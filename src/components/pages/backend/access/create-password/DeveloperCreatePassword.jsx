@@ -1,36 +1,49 @@
-import { getUrlParam, imgPath } from "@/components/helpers/functions-general";
-
 import {
+  getUrlParam,
+  imgPath,
+} from "@/components/helpers/functions-general";
+import {
+  ArrowLeft,
   CheckCircle2,
   Eye,
   EyeClosed,
+  EyeIcon,
   EyeOff,
-  MailCheck,
-  ShieldCheck,
+  Goal,
+  ShieldCheckIcon,
 } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import * as Yup from "Yup";
 import { Form, Formik } from "formik";
+import * as Yup from "Yup";
 import { InputText } from "@/components/helpers/FormInputs";
-import SpinnerButton from "../partials/spinners/SpinnerButton";
 import useQueryData from "@/components/custom-hook/useQueryData";
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { queryData } from "@/components/helpers/queryData";
-import { setError } from "@/components/store/storeAction";
+import { setError, setMessage } from "@/components/store/storeAction";
+import SpinnerButton from "../../partials/spinners/SpinnerButton";
+import FetchingSpinner from "@/components/partials/spinner/FetchingSpinner";
 
 const DeveloperCreatePassword = () => {
   const [theme, setTheme] = React.useState(localStorage.getItem("theme"));
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [showIconPassword, setShowIconPassword] = React.useState(false);
+  const [showIconConfirmPassword, setShowIconConfirmPassword] =
+    React.useState(false);
   const [success, setSuccess] = React.useState(false);
+
   const [lowerValidated, setLowerValidated] = React.useState(false);
   const [upperValidated, setUpperValidated] = React.useState(false);
   const [numberValidated, setNumberValidated] = React.useState(false);
   const [specialValidated, setSpecialValidated] = React.useState(false);
   const [lengthValidated, setLengthValidated] = React.useState(false);
   const paramKey = getUrlParam().get("key");
+  const queryClient = useQueryClient();
 
   const { isLoading, data: key } = useQueryData(
     `/v2/developer/key/${paramKey}`,
@@ -40,22 +53,22 @@ const DeveloperCreatePassword = () => {
   const mutation = useMutation({
     mutationFn: (values) => queryData(`/v2/developer/password`, "post", values),
     onSuccess: (data) => {
-      QueryClient.invalidateQueries({ queries: ["developer"] });
+      queryClient.invalidateQueries({ queries: ["developer"] });
       if (!data.success) {
-        dispatch(setError(data.error));
+        dispatch(setError(true));
+        dispatch(setMessage(data.error));
       } else {
-        if (Store.isCreatePassSuccess) {
-          dispatch(setCreatePassSuccess(false));
-          navigate(
-            `${devNavUrl}/create-password-success?redirect=/developer/login`
-          );
-        }
+        //   if (store.isCreatePassSuccess) {
+        //     dispatch(setCreatePassSuccess(false));
+        //     navigate(
+        //       `${devNavUrl}/create-password-success?redirect=/developer/login`
+        //     );
+        //   }
+        setSuccess(true);
       }
     },
   });
 
-  const [showIconConfirmPassword, setShowIconConfirmPassword] =
-    React.useState(false);
   React.useEffect(() => {
     function setThemeColor() {
       const html = document.querySelector("html");
@@ -63,24 +76,16 @@ const DeveloperCreatePassword = () => {
       html.classList.add(theme);
       setTheme(localStorage.getItem("theme"));
     }
-
     setThemeColor();
   }, [theme]);
 
-  const handleChangePasswordInput = (e) => {
+  const handelChangePasswordInput = (e) => {
     if (e.target.value === "") {
       setShowIconPassword(false);
     } else {
       setShowIconPassword(true);
     }
-  };
 
-  const handleChangeConfirmPasswordInput = (e) => {
-    if (e.target.value === "") {
-      setShowIconConfirmPassword(false);
-    } else {
-      setShowIconConfirmPassword(true);
-    }
     const lower = new RegExp("(?=.*[a-z])");
     const upper = new RegExp("(?=.*[A-Z])");
     const number = new RegExp("(?=.*[0-9])");
@@ -114,9 +119,18 @@ const DeveloperCreatePassword = () => {
     }
   };
 
+  const handelChangeConfirmPasswordInput = (e) => {
+    if (e.target.value === "") {
+      setShowIconConfirmPassword(false);
+    } else {
+      setShowIconConfirmPassword(true);
+    }
+  };
+
   const initVal = {
     new_password: "",
     confirm_password: "",
+    key: paramKey,
   };
 
   const yupSchema = Yup.object({
@@ -140,11 +154,12 @@ const DeveloperCreatePassword = () => {
           alt=""
           className="w-[150px] mx-auto mb-2"
         />
+
         {success ? (
           <div className="success-message mt-5">
-            <ShieldCheck size={50} stroke={"white"} className="mx-auto" />
+            <ShieldCheckIcon size={50} stroke="green" className="mx-auto" />
             <p className="my-5 text-center">
-              Your password is ready to use. Click the link to continue
+              Your password is ready to use. Click the link to continue.
             </p>
             <Link
               to="/admin/login"
@@ -153,12 +168,16 @@ const DeveloperCreatePassword = () => {
               Back to Login
             </Link>
           </div>
+        ) : isLoading ? (
+          <FetchingSpinner />
+        ) : key?.count === 0 || paramKey === null || paramKey === "" ? (
+          "Invalid Page"
         ) : (
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values) => {
-              console.log(values);
+              mutation.mutate(values);
             }}
           >
             {(props) => {
@@ -167,12 +186,13 @@ const DeveloperCreatePassword = () => {
                   <h5 className="text-center">Set Password</h5>
                   <div className="input-wrap">
                     <InputText
-                      label="New Password"
+                      label="Password"
                       type={showPassword ? "text" : "password"}
                       className="!py-2"
                       name="new_password"
-                      onChange={(e) => handleChangeConfirmPasswordInput(e)}
+                      onChange={(e) => handelChangePasswordInput(e)}
                     />
+
                     {showIconPassword && (
                       <button
                         className="absolute bottom-2.5 right-2"
@@ -182,20 +202,20 @@ const DeveloperCreatePassword = () => {
                         {showPassword ? (
                           <Eye size={18} />
                         ) : (
-                          <EyeClosed size={18} />
+                          <EyeOff size={18} />
                         )}
                       </button>
                     )}
                   </div>
-
                   <div className="input-wrap">
                     <InputText
-                      label="Confirm Password"
+                      label="Password"
                       type={showConfirmPassword ? "text" : "password"}
                       className="!py-2"
                       name="confirm_password"
-                      onChange={(e) => handleChangeConfirmPasswordInput(e)}
+                      onChange={(e) => handelChangeConfirmPasswordInput(e)}
                     />
+
                     {showIconConfirmPassword && (
                       <button
                         className="absolute bottom-2.5 right-2"
@@ -207,7 +227,7 @@ const DeveloperCreatePassword = () => {
                         {showConfirmPassword ? (
                           <Eye size={18} />
                         ) : (
-                          <EyeClosed size={18} />
+                          <EyeOff size={18} />
                         )}
                       </button>
                     )}
@@ -215,78 +235,88 @@ const DeveloperCreatePassword = () => {
 
                   <ul className="space-y-3 mt-5">
                     <li
-                      className={`flex gap-2 items-center text-sm opacity-50  ${
-                        lengthValidated ? "opacity-100" : ""
-                      }`}
+                      className={`flex gap-2 items-center text-sm opacity-50 italic ${
+                        lengthValidated ? "!opacity-100" : ""
+                      } `}
                     >
                       <CheckCircle2
-                        size={14}
+                        size={16}
                         stroke={
-                          lengthValidated ? "green" : "rgba(255,255,255, 0.8)"
+                          lengthValidated ? "green" : "rgba(255,255,255,0.7)"
                         }
-                      />
-                      Atleast 8 Character
+                      />{" "}
+                      Atleast 8 Characters
                     </li>
                     <li
-                      className={`flex gap-2 items-center text-sm opacity-50  ${
-                        upperValidated ? "opacity-100" : ""
+                      className={`flex gap-2 items-center text-sm opacity-50 italic ${
+                        upperValidated ? "!opacity-100" : ""
                       }`}
                     >
                       <CheckCircle2
-                        size={14}
+                        size={16}
                         stroke={
-                          upperValidated ? "green" : "rgba(255,255,255, 0.8)"
+                          upperValidated ? "green" : "rgba(255,255,255,0.7)"
                         }
-                      />
+                      />{" "}
                       Atleast 1 Uppercase
                     </li>
                     <li
-                      className={`flex gap-2 items-center text-sm opacity-50  ${
-                        lowerValidated ? "opacity-100" : ""
+                      className={`flex gap-2 items-center text-sm opacity-50 italic ${
+                        lowerValidated ? "!opacity-100" : ""
                       }`}
                     >
                       <CheckCircle2
-                        size={14}
+                        size={16}
                         stroke={
-                          lowerValidated ? "green" : "rgba(255,255,255, 0.8)"
+                          lowerValidated ? "green" : "rgba(255,255,255,0.7)"
                         }
-                      />
-                      Atleast 1 Lowercase
+                      />{" "}
+                      Atleast 1 Lowercaswe
                     </li>
                     <li
-                      className={`flex gap-2 items-center text-sm opacity-50  ${
-                        numberValidated ? "opacity-100" : ""
+                      className={`flex gap-2 items-center text-sm opacity-50 italic ${
+                        numberValidated ? "!opacity-100" : ""
                       }`}
                     >
                       <CheckCircle2
-                        size={14}
+                        size={16}
                         stroke={
-                          numberValidated ? "green" : "rgba(255,255,255, 0.8)"
+                          numberValidated ? "green" : "rgba(255,255,255,0.7)"
                         }
-                      />
+                      />{" "}
                       Atleast 1 Number
                     </li>
                     <li
-                      className={`flex gap-2 items-center text-sm opacity-50 ${
-                        specialValidated ? "opacity-100" : ""
+                      className={`flex gap-2 items-center text-sm opacity-50 italic ${
+                        specialValidated ? "!opacity-100" : ""
                       }`}
                     >
                       <CheckCircle2
-                        size={14}
+                        size={16}
                         stroke={
-                          specialValidated ? "green" : "rgba(255,255,255, 0.8)"
+                          specialValidated ? "green" : "rgba(255,255,255,0.7)"
                         }
-                      />
+                      />{" "}
                       Atleast 1 Special Character
                     </li>
                   </ul>
-
+                  <Link
+                    to="/admin/forgotpassword"
+                    className="text-xs italic hover:text-accent block text-right"
+                  >
+                    Forgot Password
+                  </Link>
                   <button
                     className="btn btn-accent w-full center-all mt-5"
-                    onClick={() => setSuccess(true)}
+                    // onClick={() => setSuccess(true)}
+                    disabled={
+                      mutation.isPending ||
+                      props.values.new_password === "" ||
+                      props.values.confirm_password === ""
+                    }
                     type="submit"
                   >
-                    <SpinnerButton /> Set Password
+                    {mutation.isPending ? <SpinnerButton /> : "Set Password"}
                   </button>
                 </Form>
               );

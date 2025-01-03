@@ -217,7 +217,7 @@ function loginAccess(
 }
 
 // Token
-function token(
+function tokenDeveloper(
     $object,
     $token,
     $key
